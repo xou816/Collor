@@ -548,7 +548,6 @@
 			children = (
 				F089D9D01F38725500395056 /* model */,
 				F089D9CA1F38700900395056 /* section */,
-				F089D9CB1F38700F00395056 /* cell */,
 				F089D9C41F386F7000395056 /* RandomViewController.swift */,
 				F089D9C51F386F7000395056 /* RandomViewController.xib */,
 				F089D9C81F386FAA00395056 /* RandomCollectionData.swift */,
@@ -563,13 +562,6 @@
 				F089D9CE1F38717800395056 /* RandomSectionDescriptor.swift */,
 			);
 			name = section;
-			sourceTree = "<group>";
-		};
-		F089D9CB1F38700F00395056 /* cell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = cell;
 			sourceTree = "<group>";
 		};
 		F089D9CC1F38711900395056 /* Common */ = {

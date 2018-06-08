@@ -31,24 +31,35 @@ struct FittingPriority {
     var vertical: UILayoutPriority
 }
 
+private struct AssociatedKeys {
+    static var Calculated = "collor_Calculated"
+}
+
 extension UICollectionViewCell  {
     
     override open func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        let attribute = super.preferredLayoutAttributesFitting(layoutAttributes)
-        guard let cell = self as? CollectionCellAdaptable, let descriptor = cell.descriptor as? CollectionCellLayoutFitting else { return attribute }
+
+        //let attribute = super.preferredLayoutAttributesFitting(layoutAttributes)
+        guard let cell = self as? CollectionCellAdaptable, let descriptor = cell.descriptor, let layoutFitting = descriptor.layoutFitting else {
+            return layoutAttributes
+        }
+
         var priority:FittingPriority
-        switch descriptor.layoutPriority {
-        case .both:
-            priority = FittingPriority(horizontal: .fittingSizeLevel, vertical: .fittingSizeLevel)
-        case .height:
+        switch layoutFitting {
+        case .fixed, .fixedHeight, .fixedWidth:
+            priority = FittingPriority(horizontal: .required, vertical: .required)
+        case .estimatedHeight:
             priority = FittingPriority(horizontal: .required, vertical: .fittingSizeLevel)
-        case .width:
+        case .estimatedWidth:
             priority = FittingPriority(horizontal: .fittingSizeLevel, vertical: .required)
         }
         let size = contentView.systemLayoutSizeFitting(layoutAttributes.size,
                                                        withHorizontalFittingPriority: priority.horizontal,
                                                        verticalFittingPriority: priority.vertical)
-        attribute.frame.size = size
-        return attribute
+        layoutAttributes.frame.size = CGSize(width: ceil(size.width), height: ceil(size.height))
+        print(">",descriptor.indexPath!,size)
+        return layoutAttributes
     }
+    
+    
 }

@@ -14,9 +14,7 @@ final class TitleCollectionViewCell: UICollectionViewCell, CollectionCellAdaptab
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var leftLineView: UIView!
     @IBOutlet weak var rightLineView: UIView!
-    
-    var descriptor: CollectionCellDescribable?
-    
+        
     func update(with adapter: CollectionAdapter) {
         guard let adapter = adapter as? TitleAdapterProtocol else {
             fatalError("TitleAdapterProtocol required")
@@ -34,6 +32,7 @@ final class TitleDescriptor: CollectionCellDescribable {
     let className: String = "TitleCollectionViewCell"
     var selectable:Bool = false    
     var adapter: CollectionAdapter
+    var layoutFitting: LayoutFitting?
     
     init(adapter:TitleAdapterProtocol) {
         self.adapter = adapter

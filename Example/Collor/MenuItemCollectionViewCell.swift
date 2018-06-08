@@ -14,7 +14,6 @@ final class MenuItemCollectionViewCell: UICollectionViewCell, CollectionCellAdap
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var arrowImage: UIImageView!
     
-    var descriptor: CollectionCellDescribable?
     var adapter:MenuItemAdapter?
     var userEventDelegate:MenuUserEventDelegate?
     
@@ -54,14 +53,9 @@ final class MenuItemDescriptor: CollectionCellDescribable {
     let className: String = "MenuItemCollectionViewCell"
     var selectable:Bool = false
     var adapter: CollectionAdapter
+    let layoutFitting: LayoutFitting? = .fixedHeight(height: 55)
     
     init(adapter:MenuItemAdapter) {
         self.adapter = adapter
-    }
-    
-    func size(_ collectionViewBounds:CGRect, sectionDescriptor: CollectionSectionDescribable) -> CGSize {
-        let sectionInset = sectionDescriptor.sectionInset(collectionViewBounds)
-        let width:CGFloat = collectionViewBounds.width - sectionInset.left - sectionInset.right
-        return CGSize(width:width, height:55)
     }
 }

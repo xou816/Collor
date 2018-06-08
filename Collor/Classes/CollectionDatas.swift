@@ -16,6 +16,8 @@ open class CollectionData {
         
     public var sections = [CollectionSectionDescribable]()
     
+    var sizes = [IndexPath: CGSize]()
+    
     open func reloadData() {
         sections.removeAll()
     }

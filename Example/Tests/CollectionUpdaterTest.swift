@@ -41,6 +41,7 @@ final class TestCellDescriptor:CollectionCellDescribable {
     var className: String = "TestCollectionViewCell"
     var selectable: Bool = false
     var adapter: CollectionAdapter
+    var layoutFitting: LayoutFitting?
     
     init(adapter:TestAdapter) {
         self.adapter = adapter

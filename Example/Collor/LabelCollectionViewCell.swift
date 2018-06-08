@@ -11,9 +11,7 @@ import Collor
 
 final class LabelCollectionViewCell: UICollectionViewCell, CollectionCellAdaptable {
     
-    @IBOutlet weak var label: UILabel!
-    var descriptor: CollectionCellDescribable?
-    
+    @IBOutlet weak var label: UILabel!    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -34,6 +32,7 @@ final class LabelDescriptor: CollectionCellDescribable {
     let className: String = "LabelCollectionViewCell"
     var selectable:Bool = true
     var adapter: CollectionAdapter
+    var layoutFitting: LayoutFitting?
     
     init(adapter:LabelAdapterProtocol) {
         self.adapter = adapter

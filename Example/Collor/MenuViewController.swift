@@ -46,6 +46,7 @@ class MenuViewController: UIViewController {
         title = "Menu"
         
         bind(collectionView: collectionView, with: collectionData, and: collectionViewDelegate, and: collectionViewDatasource)
+        (collectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.estimatedItemSize = CGSize(width: 1, height: 1)
     }
 }
 

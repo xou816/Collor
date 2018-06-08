@@ -42,7 +42,8 @@ extension CollectionDelegate : UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if let sectionDescriptor = collectionData?.sections[indexPath.section] {
             let cellDescriptor = sectionDescriptor.cells[indexPath.item]
-            return cellDescriptor.size(collectionView.bounds, sectionDescriptor: sectionDescriptor)
+            let size = cellDescriptor.size(collectionView.bounds, sectionDescriptor: sectionDescriptor)
+            return size
         }
         return CGSize.zero
     }

@@ -10,7 +10,6 @@ import UIKit
 import Collor
 
 final class PantoneColorCollectionViewCell: UICollectionViewCell, CollectionCellAdaptable {
-    var descriptor: CollectionCellDescribable?    
     func update(with adapter: CollectionAdapter) {
         guard let adapter = adapter as? PantoneColorAdapter else {
             fatalError("PantoneColorAdapter required")
@@ -26,7 +25,8 @@ final class PantoneColorDescriptor: CollectionCellDescribable {
     let identifier: String = "PantoneColorCollectionViewCell"
     let className: String = "PantoneColorCollectionViewCell"
     var selectable:Bool = true
-    var adapter: CollectionAdapter    
+    var adapter: CollectionAdapter
+    var layoutFitting: LayoutFitting?
     
     init(adapter:PantoneColorAdapter) {
         self.adapter = adapter

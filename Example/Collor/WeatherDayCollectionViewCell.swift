@@ -15,8 +15,6 @@ final class WeatherDayCollectionViewCell: UICollectionViewCell, CollectionCellAd
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var label: UILabel!
     
-    var descriptor: CollectionCellDescribable?
-
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -39,6 +37,7 @@ final class WeatherDayDescriptor: CollectionCellDescribable {
     let className: String = "WeatherDayCollectionViewCell"
     var selectable:Bool = true    
     var adapter: CollectionAdapter
+    var layoutFitting: LayoutFitting?
     
     init(adapter:WeatherDayAdapter) {
         self.adapter = adapter

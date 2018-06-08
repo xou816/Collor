@@ -38,6 +38,10 @@ class RealTimeViewController: UIViewController {
             switch response {
             case .success(let data):
                 self?.collectionData.update(model: data)
+                // works:
+//                self?.collectionData.reloadData()
+//                self?.collectionView.reloadData()
+                // doesn't work
                 let result = self?.collectionData.update { updater in
                     updater.diff()
                 }

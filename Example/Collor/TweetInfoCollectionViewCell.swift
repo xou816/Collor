@@ -13,9 +13,7 @@ final class TweetInfoCollectionViewCell: UICollectionViewCell, CollectionCellAda
    
     @IBOutlet weak var keyLabel: UILabel!
     @IBOutlet weak var valueLabel: UILabel!
-    
-    var descriptor: CollectionCellDescribable?
-    
+        
     func update(with adapter: CollectionAdapter) {
         guard let adapter = adapter as? TweetInfoAdapterProtocol else {
             fatalError("TweetInfoAdapterProtocol required")
@@ -28,10 +26,12 @@ final class TweetInfoCollectionViewCell: UICollectionViewCell, CollectionCellAda
 }
 
 final class TweetInfoDescriptor: CollectionCellDescribable {
+    
     let identifier: String = "TweetInfoCollectionViewCell"
     let className: String = "TweetInfoCollectionViewCell"
     var selectable:Bool = false    
     var adapter: CollectionAdapter
+    var layoutFitting: LayoutFitting?
     
     init(adapter:TweetInfoAdapterProtocol) {
         self.adapter = adapter

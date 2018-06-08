@@ -10,8 +10,6 @@ import UIKit
 import Collor
 
 class TestCollectionViewCell: UICollectionViewCell, CollectionCellAdaptable {
-    var descriptor: CollectionCellDescribable?
-        
     func update(with adapter: CollectionAdapter) {
         
     }

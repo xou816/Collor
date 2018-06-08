@@ -24,6 +24,8 @@ class RealTimeLayout: UICollectionViewFlowLayout {
         self.datas = datas
         super.init()
         
+        estimatedItemSize = CGSize(width: 1, height: 100)
+        
         decorationViewHandler.register(viewClass: SimpleDecorationView.self, for: sectionBackgroundKind)
         decorationViewHandler.register(viewClass: SimpleDecorationView.self, for: cellBackgroundKind)
         
@@ -31,6 +33,10 @@ class RealTimeLayout: UICollectionViewFlowLayout {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+        return true
     }
     
     override func prepare() {
