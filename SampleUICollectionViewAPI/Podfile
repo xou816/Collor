@@ -1,0 +1,10 @@
+platform :ios, '10.0'
+use_frameworks!
+
+target 'SampleUICollectionViewAPI' do
+  pod 'Collor', :path => '../'
+end
+
+target 'CollorAPI' do
+	pod 'Collor', :path => '../'
+end

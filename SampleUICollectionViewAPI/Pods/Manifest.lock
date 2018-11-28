@@ -1,0 +1,16 @@
+PODS:
+  - Collor (1.1.16)
+
+DEPENDENCIES:
+  - Collor (from `../`)
+
+EXTERNAL SOURCES:
+  Collor:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Collor: 39f1bea4218c1ab1e7f456544eb6895629356954
+
+PODFILE CHECKSUM: afd86d45b5fe0efac1b8dbd03b98767e3f48a247
+
+COCOAPODS: 1.5.3
