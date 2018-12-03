@@ -8,6 +8,7 @@
 
 import UIKit
 import Collor
+import SwiftyAttributes
 
 public final class LabelLineSeparatorCollectionViewCell: UICollectionViewCell, CollectionCellAdaptable {
 
@@ -18,21 +19,24 @@ public final class LabelLineSeparatorCollectionViewCell: UICollectionViewCell, C
     public override func awakeFromNib() {
         super.awakeFromNib()
         
-        leftLine.backgroundColor = .black
-        rightLine.backgroundColor = .black
+        leftLine.backgroundColor = .white
+        rightLine.backgroundColor = .white
     }
     
     public func update(with adapter: CollectionAdapter) {
         guard let adapter = adapter as? LabelLineSeparatorAdapterProtocol else {
             fatalError("LabelLineSeparatorAdapterProtocol required")
         }
-        label.text = adapter.label
+        label.attributedText = adapter.label.withFont(.boldSystemFont(ofSize: 16)).withTextColor(adapter.color)
+        leftLine.backgroundColor = adapter.color
+        rightLine.backgroundColor = adapter.color
     }
 
 }
 
 public protocol LabelLineSeparatorAdapterProtocol: CollectionAdapter {
     var label: String { get }
+    var color: UIColor { get }
 }
 
 public final class LabelLineSeparatorDescriptor: CollectionCellDescribable {
@@ -40,7 +44,7 @@ public final class LabelLineSeparatorDescriptor: CollectionCellDescribable {
     public let className: String = "LabelLineSeparatorCollectionViewCell"
     lazy public var identifier: String = className
     public var selectable: Bool = false
-    public var height: CGFloat = 20
+    var height: CGFloat = 20
     
     let adapter: LabelLineSeparatorAdapterProtocol
     
@@ -55,6 +59,6 @@ public final class LabelLineSeparatorDescriptor: CollectionCellDescribable {
     public func size(_ collectionView: UICollectionView, sectionDescriptor: CollectionSectionDescribable) -> CGSize {
         let sectionInset = sectionDescriptor.sectionInset(collectionView)
         let width:CGFloat = collectionView.bounds.width - sectionInset.left - sectionInset.right
-        return CGSize(width:width, height: 20)
+        return CGSize(width:width, height: height)
     }
 }

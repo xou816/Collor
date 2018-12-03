@@ -1,8 +1,14 @@
 PODS:
   - Collor (1.1.16)
+  - SwiftyAttributes (5.0.0)
 
 DEPENDENCIES:
   - Collor (from `../`)
+  - SwiftyAttributes
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SwiftyAttributes
 
 EXTERNAL SOURCES:
   Collor:
@@ -10,7 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Collor: 39f1bea4218c1ab1e7f456544eb6895629356954
+  SwiftyAttributes: a6e7bbac1e9a9f5c0b42e4055563ca091dda03ad
 
-PODFILE CHECKSUM: afd86d45b5fe0efac1b8dbd03b98767e3f48a247
+PODFILE CHECKSUM: 22c99e89b140d4fd2d93c7fce8582bc81fbf21d5
 
 COCOAPODS: 1.5.3

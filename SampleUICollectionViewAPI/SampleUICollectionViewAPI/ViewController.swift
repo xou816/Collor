@@ -8,6 +8,7 @@
 
 import UIKit
 import Collor
+import CollorAPI
 
 class ViewController : UIViewController {
     
@@ -23,6 +24,7 @@ class ViewController : UIViewController {
         super.viewDidLoad()
         
         bind(collectionView: collectionView, with: collectionData, and: collectionViewDelegate, and: collectionViewDatasource)
+        collectionView.collectionViewLayout = VerticalCollectionViewLayout(collectionViewData: collectionData)
     }
 }
 

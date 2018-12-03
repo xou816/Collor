@@ -18,6 +18,12 @@
 		F02D3EF621AE76CC008BDAA7 /* LabelLineSeparatorCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F02D3EF421AE76CC008BDAA7 /* LabelLineSeparatorCollectionViewCell.xib */; };
 		F02D3EFA21AE76DB008BDAA7 /* LabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D3EF821AE76DB008BDAA7 /* LabelCollectionViewCell.swift */; };
 		F02D3EFB21AE76DB008BDAA7 /* LabelCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F02D3EF921AE76DB008BDAA7 /* LabelCollectionViewCell.xib */; };
+		F02D3EFE21AE797F008BDAA7 /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D3EFD21AE797F008BDAA7 /* Builder.swift */; };
+		F02D3F0021AE79CD008BDAA7 /* CollectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D3EFF21AE79CD008BDAA7 /* CollectionData.swift */; };
+		F02D3F0221AE79FD008BDAA7 /* SectionDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D3F0121AE79FD008BDAA7 /* SectionDescriptor.swift */; };
+		F02D3F0421AE7A87008BDAA7 /* VerticalSpace&Inset.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D3F0321AE7A87008BDAA7 /* VerticalSpace&Inset.swift */; };
+		F02D3F0621AE7AED008BDAA7 /* DecorationBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D3F0521AE7AED008BDAA7 /* DecorationBlock.swift */; };
+		F06882A521B03FC300557232 /* WhiteBorderedDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06882A421B03FC300557232 /* WhiteBorderedDecorationView.swift */; };
 		F0FA017121AE6FFA00D2EEB7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA017021AE6FFA00D2EEB7 /* AppDelegate.swift */; };
 		F0FA017321AE6FFA00D2EEB7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FA017221AE6FFA00D2EEB7 /* ViewController.swift */; };
 		F0FA017621AE6FFA00D2EEB7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0FA017421AE6FFA00D2EEB7 /* Main.storyboard */; };
@@ -64,6 +70,12 @@
 		F02D3EF421AE76CC008BDAA7 /* LabelLineSeparatorCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelLineSeparatorCollectionViewCell.xib; sourceTree = "<group>"; };
 		F02D3EF821AE76DB008BDAA7 /* LabelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabelCollectionViewCell.swift; sourceTree = "<group>"; };
 		F02D3EF921AE76DB008BDAA7 /* LabelCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LabelCollectionViewCell.xib; sourceTree = "<group>"; };
+		F02D3EFD21AE797F008BDAA7 /* Builder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Builder.swift; sourceTree = "<group>"; };
+		F02D3EFF21AE79CD008BDAA7 /* CollectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionData.swift; sourceTree = "<group>"; };
+		F02D3F0121AE79FD008BDAA7 /* SectionDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionDescriptor.swift; sourceTree = "<group>"; };
+		F02D3F0321AE7A87008BDAA7 /* VerticalSpace&Inset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "VerticalSpace&Inset.swift"; sourceTree = "<group>"; };
+		F02D3F0521AE7AED008BDAA7 /* DecorationBlock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecorationBlock.swift; sourceTree = "<group>"; };
+		F06882A421B03FC300557232 /* WhiteBorderedDecorationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhiteBorderedDecorationView.swift; sourceTree = "<group>"; };
 		F0FA016D21AE6FFA00D2EEB7 /* SampleUICollectionViewAPI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SampleUICollectionViewAPI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0FA017021AE6FFA00D2EEB7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0FA017221AE6FFA00D2EEB7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +130,8 @@
 		F02D3EE121AE7608008BDAA7 /* CollorAPI */ = {
 			isa = PBXGroup;
 			children = (
+				F06882A321B03F9B00557232 /* decorationView */,
+				F02D3EFC21AE7941008BDAA7 /* core */,
 				F02D3EF121AE7678008BDAA7 /* cells */,
 				F02D3EEE21AE7655008BDAA7 /* layout */,
 				F02D3EEC21AE761E008BDAA7 /* CollorAPI.h */,
@@ -161,6 +175,26 @@
 			path = Label;
 			sourceTree = "<group>";
 		};
+		F02D3EFC21AE7941008BDAA7 /* core */ = {
+			isa = PBXGroup;
+			children = (
+				F02D3EFD21AE797F008BDAA7 /* Builder.swift */,
+				F02D3EFF21AE79CD008BDAA7 /* CollectionData.swift */,
+				F02D3F0121AE79FD008BDAA7 /* SectionDescriptor.swift */,
+				F02D3F0321AE7A87008BDAA7 /* VerticalSpace&Inset.swift */,
+				F02D3F0521AE7AED008BDAA7 /* DecorationBlock.swift */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		F06882A321B03F9B00557232 /* decorationView */ = {
+			isa = PBXGroup;
+			children = (
+				F06882A421B03FC300557232 /* WhiteBorderedDecorationView.swift */,
+			);
+			path = decorationView;
+			sourceTree = "<group>";
+		};
 		F0FA016421AE6FFA00D2EEB7 = {
 			isa = PBXGroup;
 			children = (
@@ -186,11 +220,11 @@
 			children = (
 				F0FA017021AE6FFA00D2EEB7 /* AppDelegate.swift */,
 				F0FA017221AE6FFA00D2EEB7 /* ViewController.swift */,
+				F02D3EC721AE73E5008BDAA7 /* SampleCollectionData.swift */,
 				F0FA017421AE6FFA00D2EEB7 /* Main.storyboard */,
 				F0FA017721AE6FFB00D2EEB7 /* Assets.xcassets */,
 				F0FA017921AE6FFB00D2EEB7 /* LaunchScreen.storyboard */,
 				F0FA017C21AE6FFB00D2EEB7 /* Info.plist */,
-				F02D3EC721AE73E5008BDAA7 /* SampleCollectionData.swift */,
 			);
 			path = SampleUICollectionViewAPI;
 			sourceTree = "<group>";
@@ -364,12 +398,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SampleUICollectionViewAPI/Pods-SampleUICollectionViewAPI-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Collor/Collor.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyAttributes/SwiftyAttributes.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Collor.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyAttributes.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -383,9 +419,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F02D3F0421AE7A87008BDAA7 /* VerticalSpace&Inset.swift in Sources */,
+				F06882A521B03FC300557232 /* WhiteBorderedDecorationView.swift in Sources */,
 				F02D3EFA21AE76DB008BDAA7 /* LabelCollectionViewCell.swift in Sources */,
 				F02D3EF021AE766F008BDAA7 /* VerticalCollectionViewLayout.swift in Sources */,
+				F02D3F0621AE7AED008BDAA7 /* DecorationBlock.swift in Sources */,
+				F02D3F0221AE79FD008BDAA7 /* SectionDescriptor.swift in Sources */,
 				F02D3EF521AE76CC008BDAA7 /* LabelLineSeparatorCollectionViewCell.swift in Sources */,
+				F02D3EFE21AE797F008BDAA7 /* Builder.swift in Sources */,
+				F02D3F0021AE79CD008BDAA7 /* CollectionData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -444,6 +486,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CollorAPI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -475,6 +518,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = CollorAPI/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

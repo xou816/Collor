@@ -24,11 +24,6 @@ public final class LabelCollectionViewCell: UICollectionViewCell, CollectionCell
 
 public protocol LabelAdapterProtocol: CollectionAdapter {
     var label: NSAttributedString { get }
-    var clickable: Bool { get }
-}
-
-public extension LabelAdapterProtocol {
-    var clickable: Bool { return false }
 }
 
 public final class LabelDescriptor: CollectionCellDescribable {
@@ -41,7 +36,6 @@ public final class LabelDescriptor: CollectionCellDescribable {
     
     public init(adapter: LabelAdapterProtocol) {
         self.adapter = adapter
-        self.selectable = adapter.clickable
     }
     
     public func size(_ collectionView: UICollectionView, sectionDescriptor: CollectionSectionDescribable) -> CGSize {

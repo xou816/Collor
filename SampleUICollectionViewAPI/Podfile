@@ -2,9 +2,11 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'SampleUICollectionViewAPI' do
-  pod 'Collor', :path => '../'
+	pod 'SwiftyAttributes'
+  	pod 'Collor', :path => '../'
 end
 
 target 'CollorAPI' do
+	pod 'SwiftyAttributes'
 	pod 'Collor', :path => '../'
 end
