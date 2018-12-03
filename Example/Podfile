@@ -9,8 +9,8 @@ target 'Collor_Example' do
   target 'Collor_Tests' do
     inherit! :search_paths
 
-    pod 'CwlPreconditionTesting', :git => 'https://github.com/mattgallagher/CwlPreconditionTesting.git'
-	pod 'CwlCatchException', :git => 'https://github.com/mattgallagher/CwlCatchException.git'
+    pod 'CwlPreconditionTesting', :git => 'https://github.com/mattgallagher/CwlPreconditionTesting.git', :commit => '3f695f7'
+	pod 'CwlCatchException', :git => 'https://github.com/mattgallagher/CwlCatchException.git', :commit => 'ef02010'
 
     
   end

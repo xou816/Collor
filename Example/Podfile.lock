@@ -1,42 +1,48 @@
 PODS:
-  - Alamofire (4.5.1)
-  - AlamofireImage (3.3.0):
-    - Alamofire (~> 4.5)
-  - Collor (1.1.3)
+  - Alamofire (4.8.0)
+  - AlamofireImage (3.5.0):
+    - Alamofire (~> 4.8)
+  - Collor (1.1.16)
   - CwlCatchException (1.0.2)
-  - CwlPreconditionTesting (1.1.0):
-    - CwlCatchException
+  - CwlPreconditionTesting (1.1.0)
 
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - Collor (from `../`)
-  - CwlCatchException (from `https://github.com/mattgallagher/CwlCatchException.git`)
-  - CwlPreconditionTesting (from `https://github.com/mattgallagher/CwlPreconditionTesting.git`)
+  - CwlCatchException (from `https://github.com/mattgallagher/CwlCatchException.git`, commit `ef02010`)
+  - CwlPreconditionTesting (from `https://github.com/mattgallagher/CwlPreconditionTesting.git`, commit `3f695f7`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - AlamofireImage
 
 EXTERNAL SOURCES:
   Collor:
-    :path: ../
+    :path: "../"
   CwlCatchException:
+    :commit: ef02010
     :git: https://github.com/mattgallagher/CwlCatchException.git
   CwlPreconditionTesting:
+    :commit: 3f695f7
     :git: https://github.com/mattgallagher/CwlPreconditionTesting.git
 
 CHECKOUT OPTIONS:
   CwlCatchException:
-    :commit: b14c111e9b33cd142bd4bc75c482cfd5c3490923
+    :commit: ef02010
     :git: https://github.com/mattgallagher/CwlCatchException.git
   CwlPreconditionTesting:
-    :commit: b2e4800abf854366d4492051069cce7b44d20ba1
+    :commit: 3f695f7
     :git: https://github.com/mattgallagher/CwlPreconditionTesting.git
 
 SPEC CHECKSUMS:
-  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
-  AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
-  Collor: 0037189e2615ebab3473db1d18673efe503da951
+  Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
+  AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
+  Collor: 39f1bea4218c1ab1e7f456544eb6895629356954
   CwlCatchException: 70a52ae44ea5d46db7bd385f801a94942420cd8c
-  CwlPreconditionTesting: d9b35890c80b34668cd90da5bef077fd817a99fc
+  CwlPreconditionTesting: 9add30f7ba4e6a9913b802be66acb66d413c6c8a
 
-PODFILE CHECKSUM: 095a3770995250583a2320934d432cbf007000b8
+PODFILE CHECKSUM: 53c04d869f5a6221857649c49cc9cf0fbebc4c3b
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3

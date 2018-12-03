@@ -21,7 +21,6 @@ final class SampleCollectionData : CollorAPI.CollectionData {
             builder.add(label: Adapters.LoremIpsumAdapter())
             
             builder.add(verticalSpace: .huge)
-            
         }
         
         addSection().horizontalInset(.big).reloadSection { builder in

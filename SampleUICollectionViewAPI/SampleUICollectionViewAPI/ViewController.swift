@@ -23,6 +23,8 @@ class ViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationController?.navigationBar.barStyle = .default
+        
         bind(collectionView: collectionView, with: collectionData, and: collectionViewDelegate, and: collectionViewDatasource)
         collectionView.collectionViewLayout = VerticalCollectionViewLayout(collectionViewData: collectionData)
     }
