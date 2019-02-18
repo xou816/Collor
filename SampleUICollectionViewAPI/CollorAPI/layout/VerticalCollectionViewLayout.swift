@@ -21,6 +21,7 @@ open class VerticalCollectionViewLayout: UICollectionViewFlowLayout {
     
     private enum Kind: String {
         case whiteBordered
+        case line
     }
     
     
@@ -29,6 +30,7 @@ open class VerticalCollectionViewLayout: UICollectionViewFlowLayout {
         super.init()
         
         decorationViewHandler.register(viewClass: WhiteBorderedDecorationView.self, for: Kind.whiteBordered.rawValue)
+        decorationViewHandler.register(viewClass: LineDecorationView.self, for: Kind.line.rawValue)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -104,6 +106,11 @@ open class VerticalCollectionViewLayout: UICollectionViewFlowLayout {
                                    firstIndexPath: firstIndexPath, endIndexPath: endIndexPath,
                                    firstCellAttributes: firstCellAttributes, endCellAttributes: endCellAttributes,
                                    in: collectionView)
+            case .horizontalLine:
+                addLineDecoration(decorationBlock: decorationBlock,
+                                  indexPath: firstIndexPath,
+                                  cellAttributes: firstCellAttributes,
+                                  in: collectionView)
             }
         }
         
@@ -119,12 +126,34 @@ open class VerticalCollectionViewLayout: UICollectionViewFlowLayout {
         
         let decorationAttributes = UICollectionViewLayoutAttributes(forDecorationViewOfKind: Kind.whiteBordered.rawValue, with: firstIndexPath)
         
-        let offsetX: CGFloat = 5
+        let offsetX: CGFloat = 10
         
         let origin = CGPoint(x: offsetX,
                              y: firstCellAttributes.frame.origin.y - decorationBlock.type.topPadding())
         let width = collectionView.frame.width - 2 * offsetX
         let height = endCellAttributes.frame.maxY - origin.y + decorationBlock.type.bottomPadding()
+        
+        decorationAttributes.zIndex = decorationBlock.type.zIndex()
+        decorationAttributes.frame = CGRect(x: origin.x,
+                                            y: origin.y,
+                                            width: width,
+                                            height: height)
+        
+        decorationViewHandler.add(attributes: decorationAttributes)
+    }
+    
+    private func addLineDecoration(decorationBlock: DecorationBlock,
+                                   indexPath: IndexPath,
+                                   cellAttributes: UICollectionViewLayoutAttributes,
+                                   in collectionView: UICollectionView) {
+        
+        let decorationAttributes = UICollectionViewLayoutAttributes(forDecorationViewOfKind: Kind.line.rawValue,
+                                                                    with: indexPath)
+        let offsetX: CGFloat = 10
+        let origin = CGPoint(x: offsetX,
+                             y: cellAttributes.frame.origin.y - decorationBlock.type.topPadding() )
+        let width = collectionView.frame.width - 2 * offsetX
+        let height: CGFloat = 1
         
         decorationAttributes.zIndex = decorationBlock.type.zIndex()
         decorationAttributes.frame = CGRect(x: origin.x,

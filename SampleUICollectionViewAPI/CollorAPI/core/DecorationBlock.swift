@@ -11,18 +11,23 @@ import Collor
 
 public enum DecorationBlockType {
     case whiteBordered
+    case horizontalLine
 }
 
 extension DecorationBlockType {
     func zIndex() -> Int {
         switch self {
-        case .whiteBordered:
+        case .horizontalLine:
             return -1
+        case .whiteBordered:
+            return -2
         }
     }
     
     public func topPadding() -> CGFloat {
         switch self {
+        case .horizontalLine:
+            return 0
         case .whiteBordered:
             return 10
         }
@@ -30,6 +35,8 @@ extension DecorationBlockType {
     
     public func bottomPadding() -> CGFloat {
         switch self {
+        case .horizontalLine:
+            return 0
         case .whiteBordered:
             return 10
         }

@@ -27,16 +27,15 @@ public final class LabelLineSeparatorCollectionViewCell: UICollectionViewCell, C
         guard let adapter = adapter as? LabelLineSeparatorAdapterProtocol else {
             fatalError("LabelLineSeparatorAdapterProtocol required")
         }
-        label.attributedText = adapter.label.withFont(.boldSystemFont(ofSize: 16)).withTextColor(adapter.color)
-        leftLine.backgroundColor = adapter.color
-        rightLine.backgroundColor = adapter.color
+        label.attributedText = adapter.label.withFont(.boldSystemFont(ofSize: 16)).withTextColor(.darkText)
+        leftLine.backgroundColor = UIColor.lightGray
+        rightLine.backgroundColor = UIColor.lightGray
     }
 
 }
 
 public protocol LabelLineSeparatorAdapterProtocol: CollectionAdapter {
     var label: String { get }
-    var color: UIColor { get }
 }
 
 public final class LabelLineSeparatorDescriptor: CollectionCellDescribable {
@@ -44,7 +43,7 @@ public final class LabelLineSeparatorDescriptor: CollectionCellDescribable {
     public let className: String = "LabelLineSeparatorCollectionViewCell"
     lazy public var identifier: String = className
     public var selectable: Bool = false
-    var height: CGFloat = 20
+    let height: CGFloat = 20
     
     let adapter: LabelLineSeparatorAdapterProtocol
     

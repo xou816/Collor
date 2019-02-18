@@ -36,6 +36,11 @@ public class Builder {
         return add(cell: cellDescriptor)
     }
     
+    @discardableResult public func add(link: LinkAdapterProtocol) -> CollectionCellDescribable {
+        let cellDescriptor = LinkDescriptor(adapter: link)
+        return add(cell: cellDescriptor)
+    }
+    
     @discardableResult public func add(separator adapter: LabelLineSeparatorAdapterProtocol) -> CollectionCellDescribable {
         let cellDescriptor = LabelLineSeparatorDescriptor(adapter: adapter)
         return add(cell: cellDescriptor)
@@ -46,6 +51,12 @@ public class Builder {
         let decorationBlock = DecorationBlock(type: type, startItemIndex: startindex, sectionDescriptor: sectionDescriptor)
         uncompleteDecorationBlocks.append(decorationBlock)
         return decorationBlock
+    }
+    
+    public func addHorizontalLine() {
+        let startindex = cells.indices.last.map { $0 + 1 } ?? 0 // start the decorationView after the last cell
+        let block = DecorationBlock(type: .horizontalLine, startItemIndex: startindex, sectionDescriptor: sectionDescriptor)
+        self.decorationBlocks.append(block)
     }
     
     public func endDecorationBlock(_ block: DecorationBlock?) {

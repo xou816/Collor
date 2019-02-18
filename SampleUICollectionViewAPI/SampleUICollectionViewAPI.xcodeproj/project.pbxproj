@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		47CFC04D4EB3C212EB57E8B1 /* Pods_SampleUICollectionViewAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AE9E51CD26815B2EE537B3C /* Pods_SampleUICollectionViewAPI.framework */; };
 		D229E018A205B623D3777EE8 /* Pods_CollorAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B91913ECD9BC5B6300CC9D36 /* Pods_CollorAPI.framework */; };
+		F00FCABD221A981200960ED0 /* LinkCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00FCABB221A981200960ED0 /* LinkCollectionViewCell.swift */; };
+		F00FCABE221A981200960ED0 /* LinkCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F00FCABC221A981200960ED0 /* LinkCollectionViewCell.xib */; };
+		F00FCAC0221A98EC00960ED0 /* CollorAPI.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F00FCABF221A98EC00960ED0 /* CollorAPI.xcassets */; };
+		F00FCAC2221A9D7400960ED0 /* LineDecorationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00FCAC1221A9D7400960ED0 /* LineDecorationView.swift */; };
 		F02D3EC821AE73E5008BDAA7 /* SampleCollectionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F02D3EC721AE73E5008BDAA7 /* SampleCollectionData.swift */; };
 		F02D3EE721AE7608008BDAA7 /* CollorAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F02D3EE021AE7608008BDAA7 /* CollorAPI.framework */; };
 		F02D3EE821AE7608008BDAA7 /* CollorAPI.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F02D3EE021AE7608008BDAA7 /* CollorAPI.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -61,6 +65,10 @@
 		9CEAD54A7CA2A07AF61DC0D9 /* Pods-CollorAPI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollorAPI.release.xcconfig"; path = "Pods/Target Support Files/Pods-CollorAPI/Pods-CollorAPI.release.xcconfig"; sourceTree = "<group>"; };
 		B91913ECD9BC5B6300CC9D36 /* Pods_CollorAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CollorAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD5A3116DF3F7EB1F598D9AB /* Pods-CollorAPI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CollorAPI.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CollorAPI/Pods-CollorAPI.debug.xcconfig"; sourceTree = "<group>"; };
+		F00FCABB221A981200960ED0 /* LinkCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkCollectionViewCell.swift; sourceTree = "<group>"; };
+		F00FCABC221A981200960ED0 /* LinkCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LinkCollectionViewCell.xib; sourceTree = "<group>"; };
+		F00FCABF221A98EC00960ED0 /* CollorAPI.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = CollorAPI.xcassets; sourceTree = "<group>"; };
+		F00FCAC1221A9D7400960ED0 /* LineDecorationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineDecorationView.swift; sourceTree = "<group>"; };
 		F02D3EC721AE73E5008BDAA7 /* SampleCollectionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCollectionData.swift; sourceTree = "<group>"; };
 		F02D3EE021AE7608008BDAA7 /* CollorAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CollorAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F02D3EE321AE7608008BDAA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,6 +135,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F00FCAB2221A97E000960ED0 /* link */ = {
+			isa = PBXGroup;
+			children = (
+				F00FCABB221A981200960ED0 /* LinkCollectionViewCell.swift */,
+				F00FCABC221A981200960ED0 /* LinkCollectionViewCell.xib */,
+			);
+			path = link;
+			sourceTree = "<group>";
+		};
 		F02D3EE121AE7608008BDAA7 /* CollorAPI */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +153,7 @@
 				F02D3EEE21AE7655008BDAA7 /* layout */,
 				F02D3EEC21AE761E008BDAA7 /* CollorAPI.h */,
 				F02D3EE321AE7608008BDAA7 /* Info.plist */,
+				F00FCABF221A98EC00960ED0 /* CollorAPI.xcassets */,
 			);
 			path = CollorAPI;
 			sourceTree = "<group>";
@@ -151,6 +169,7 @@
 		F02D3EF121AE7678008BDAA7 /* cells */ = {
 			isa = PBXGroup;
 			children = (
+				F00FCAB2221A97E000960ED0 /* link */,
 				F02D3EF721AE76DB008BDAA7 /* Label */,
 				F02D3EF221AE76CC008BDAA7 /* LabelLineSeparator */,
 			);
@@ -190,6 +209,7 @@
 		F06882A321B03F9B00557232 /* decorationView */ = {
 			isa = PBXGroup;
 			children = (
+				F00FCAC1221A9D7400960ED0 /* LineDecorationView.swift */,
 				F06882A421B03FC300557232 /* WhiteBorderedDecorationView.swift */,
 			);
 			path = decorationView;
@@ -328,6 +348,8 @@
 			files = (
 				F02D3EF621AE76CC008BDAA7 /* LabelLineSeparatorCollectionViewCell.xib in Resources */,
 				F02D3EFB21AE76DB008BDAA7 /* LabelCollectionViewCell.xib in Resources */,
+				F00FCABE221A981200960ED0 /* LinkCollectionViewCell.xib in Resources */,
+				F00FCAC0221A98EC00960ED0 /* CollorAPI.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +444,9 @@
 				F02D3F0421AE7A87008BDAA7 /* VerticalSpace&Inset.swift in Sources */,
 				F06882A521B03FC300557232 /* WhiteBorderedDecorationView.swift in Sources */,
 				F02D3EFA21AE76DB008BDAA7 /* LabelCollectionViewCell.swift in Sources */,
+				F00FCAC2221A9D7400960ED0 /* LineDecorationView.swift in Sources */,
 				F02D3EF021AE766F008BDAA7 /* VerticalCollectionViewLayout.swift in Sources */,
+				F00FCABD221A981200960ED0 /* LinkCollectionViewCell.swift in Sources */,
 				F02D3F0621AE7AED008BDAA7 /* DecorationBlock.swift in Sources */,
 				F02D3F0221AE79FD008BDAA7 /* SectionDescriptor.swift in Sources */,
 				F02D3EF521AE76CC008BDAA7 /* LabelLineSeparatorCollectionViewCell.swift in Sources */,
