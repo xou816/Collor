@@ -26,7 +26,7 @@
             </objects>
             <point key="canvasLocation" x="-1490" y="63"/>
         </scene>
-        <!--View Controller-->
+        <!--CollorAPI-->
         <scene sceneID="yWa-Zc-RLv">
             <objects>
                 <viewController id="7mP-ue-3kh" customClass="ViewController" customModule="SampleUICollectionViewAPI" customModuleProvider="target" sceneMemberID="viewController">
@@ -55,7 +55,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VNZ-df-Aal"/>
                     </view>
-                    <navigationItem key="navigationItem" id="C7d-YI-nZk"/>
+                    <navigationItem key="navigationItem" title="CollorAPI" id="C7d-YI-nZk"/>
                     <connections>
                         <outlet property="collectionView" destination="Nk3-Eq-Szq" id="z6F-cg-QTt"/>
                     </connections>

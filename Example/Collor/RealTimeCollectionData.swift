@@ -11,9 +11,9 @@ import Collor
 
 final class RealTimeCollectionData : CollectionData {
     
-    var model:RealTimeModel?
+    var model: RealTimeModel?
     
-    func update(model:RealTimeModel) {
+    func update(model: RealTimeModel) {
         self.model = model
     }
     

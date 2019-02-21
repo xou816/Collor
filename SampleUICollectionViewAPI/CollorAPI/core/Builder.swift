@@ -22,7 +22,7 @@ public class Builder {
     }
     
     public func add(verticalSpace: VerticalSpace) {
-        let index = cells.indices.last ?? -1
+        let index = cells.indices.last ?? 0
         verticalSpaces[index] = verticalSpace
     }
     
