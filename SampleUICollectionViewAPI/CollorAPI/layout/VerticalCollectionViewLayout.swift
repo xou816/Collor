@@ -54,21 +54,18 @@ open class VerticalCollectionViewLayout: UICollectionViewFlowLayout {
         
         let decorationBlocks = collectionViewData.sections.compactMap { $0 as? SectionDescriptor }.flatMap { $0.decorationBlocks }
         
-        // compute
-        let sectionsCount = collectionView.numberOfSections
-        for sectionIndex in 0..<sectionsCount {
+        collectionViewData.sections.enumerated().forEach { (sectionIndex, sectionDescriptor) in
+            
+            // cast SectionDescriptor
             guard let sectionDescriptor = collectionViewData.sections[sectionIndex] as? SectionDescriptor else {
-                continue
+                return
             }
             
-            //TODO: allow to add a space above the section
-            
-            let itemsCount = collectionView.numberOfItems(inSection: sectionIndex)
-            for itemIndex in 0..<itemsCount {
-                let indexPath = IndexPath(item: itemIndex, section: sectionIndex)
+            sectionDescriptor.cells.compactMap { $0.indexPath }.forEach { indexPath in
                 
+                // copy super itemAttributes
                 guard let itemAttributes = super.layoutAttributesForItem(at: indexPath)?.copy() as? UICollectionViewLayoutAttributes else {
-                    continue
+                    return
                 }
                 
                 // block top padding ?
@@ -85,7 +82,7 @@ open class VerticalCollectionViewLayout: UICollectionViewFlowLayout {
                 globalOffset.y += bottomPadding
                 
                 // vertical spaces
-                if let verticalSpace = sectionDescriptor.verticalSpaces[itemIndex] {
+                if let verticalSpace = sectionDescriptor.verticalSpaces[indexPath.item] {
                     globalOffset.y += verticalSpace
                 }
             }
