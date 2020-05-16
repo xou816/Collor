@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="center" preservesSuperviewLayoutMargins="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rt2-JY-fxK" customClass="BooleanSetting" customModule="Collor_Example" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="64"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="x0o-Zo-8P2">
+                    <rect key="frame" x="0.0" y="0.0" width="200" height="64"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="26S-ox-NDB">
+                            <rect key="frame" x="0.0" y="22" width="42" height="20.5"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9mg-Ae-nNd">
+                            <rect key="frame" x="151" y="16.5" width="51" height="31"/>
+                            <connections>
+                                <action selector="touchUpInside:" destination="Rt2-JY-fxK" eventType="touchUpInside" id="YYb-7w-jBX"/>
+                            </connections>
+                        </switch>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="I2q-xX-eax"/>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="x0o-Zo-8P2" firstAttribute="width" secondItem="Rt2-JY-fxK" secondAttribute="width" id="Fwg-Lc-Mhl"/>
+                <constraint firstItem="x0o-Zo-8P2" firstAttribute="height" secondItem="Rt2-JY-fxK" secondAttribute="height" id="Lpo-6I-De7"/>
+                <constraint firstItem="x0o-Zo-8P2" firstAttribute="top" secondItem="Rt2-JY-fxK" secondAttribute="top" id="YI9-fR-Ass"/>
+                <constraint firstItem="x0o-Zo-8P2" firstAttribute="leading" secondItem="Rt2-JY-fxK" secondAttribute="leading" id="ggj-fI-cVH"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="label" destination="26S-ox-NDB" id="tLB-GT-qfZ"/>
+                <outlet property="switch" destination="9mg-Ae-nNd" id="c5j-IM-bF4"/>
+            </connections>
+            <point key="canvasLocation" x="213.04347826086959" y="29.464285714285712"/>
+        </view>
+    </objects>
+</document>

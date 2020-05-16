@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3AF0B0AA246ACA9B00ACDE94 /* StackExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF0B0A9246ACA9B00ACDE94 /* StackExample.swift */; };
+		3AF0B0AE246ACDFB00ACDE94 /* AdaptableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF0B0AD246ACDFB00ACDE94 /* AdaptableLabel.swift */; };
+		3AF0B0B0246AEACB00ACDE94 /* BooleanSetting.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF0B0AF246AEACB00ACDE94 /* BooleanSetting.xib */; };
+		3AF0B0B2246AEBBB00ACDE94 /* BooleanSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AF0B0B1246AEBBB00ACDE94 /* BooleanSetting.swift */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
@@ -129,6 +133,10 @@
 		001AF6C40ED6DA6C7D7D9F48 /* Pods-Collor_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Collor_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-Collor_Example/Pods-Collor_Example.release.xcconfig"; sourceTree = "<group>"; };
 		1A53FA9DC25F27858820FE6C /* Pods-Collor_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Collor_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Collor_Example/Pods-Collor_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		351F1AEC9685F40C56AAB6AE /* Pods_Collor_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Collor_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AF0B0A9246ACA9B00ACDE94 /* StackExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackExample.swift; sourceTree = "<group>"; };
+		3AF0B0AD246ACDFB00ACDE94 /* AdaptableLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdaptableLabel.swift; sourceTree = "<group>"; };
+		3AF0B0AF246AEACB00ACDE94 /* BooleanSetting.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BooleanSetting.xib; sourceTree = "<group>"; };
+		3AF0B0B1246AEBBB00ACDE94 /* BooleanSetting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BooleanSetting.swift; sourceTree = "<group>"; };
 		5636DECB74EFAD63E652F76B /* Collor.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Collor.podspec; path = ../Collor.podspec; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* Collor_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Collor_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -270,6 +278,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		3AF0B0A8246ACA8400ACDE94 /* Stack */ = {
+			isa = PBXGroup;
+			children = (
+				3AF0B0A9246ACA9B00ACDE94 /* StackExample.swift */,
+				3AF0B0AD246ACDFB00ACDE94 /* AdaptableLabel.swift */,
+				3AF0B0AF246AEACB00ACDE94 /* BooleanSetting.xib */,
+				3AF0B0B1246AEBBB00ACDE94 /* BooleanSetting.swift */,
+			);
+			path = Stack;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -294,6 +313,7 @@
 		607FACD21AFB9204008FA782 /* Example for Collor */ = {
 			isa = PBXGroup;
 			children = (
+				3AF0B0A8246ACA8400ACDE94 /* Stack */,
 				F0CEDE0F2200B06A00817466 /* Alphabet */,
 				F089D9CC1F38711900395056 /* Common */,
 				F011A0B91F41CBE6007F9FEB /* Menu Sample */,
@@ -845,6 +865,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -884,6 +905,7 @@
 				F07823531F5E7D5700FE9CC0 /* TweetCollectionViewCell.xib in Resources */,
 				F0577CCD1F39EA420051BD18 /* PantoneColorCollectionViewCell.xib in Resources */,
 				F0D3ED6A1F41F5EA0087CBD2 /* MenuItemCollectionViewCell.xib in Resources */,
+				3AF0B0B0246AEACB00ACDE94 /* BooleanSetting.xib in Resources */,
 				F089D9B71F3861A500395056 /* WeatherViewController.xib in Resources */,
 				F0530FC81F5DF06D00F2318F /* RealTimeViewController.xib in Resources */,
 				F0530FD11F5DF28100F2318F /* tweets_1.json in Resources */,
@@ -916,7 +938,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Collor_Example/Pods-Collor_Example-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Collor_Example/Pods-Collor_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Collor/Collor.framework",
@@ -929,7 +951,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Collor_Example/Pods-Collor_Example-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Collor_Example/Pods-Collor_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		41B1503A355719D86F7CDCE4 /* [CP] Check Pods Manifest.lock */ = {
@@ -956,7 +978,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Collor_Tests/Pods-Collor_Tests-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Collor_Tests/Pods-Collor_Tests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CwlCatchException/CwlCatchException.framework",
 				"${BUILT_PRODUCTS_DIR}/CwlPreconditionTesting/CwlPreconditionTesting.framework",
 			);
@@ -967,7 +989,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Collor_Tests/Pods-Collor_Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Collor_Tests/Pods-Collor_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FFF01212103F51BCCB943BD6 /* [CP] Check Pods Manifest.lock */ = {
@@ -1004,6 +1026,7 @@
 				F0CEDE1B2200B27700817466 /* AlphabetSectionDescriptor.swift in Sources */,
 				F089D9AC1F3861A500395056 /* WeatherDayCollectionViewCell.swift in Sources */,
 				F089D9B61F3861A500395056 /* WeatherViewController.swift in Sources */,
+				3AF0B0AE246ACDFB00ACDE94 /* AdaptableLabel.swift in Sources */,
 				F089D9CF1F38717800395056 /* RandomSectionDescriptor.swift in Sources */,
 				F0D3ED5A1F41E8340087CBD2 /* MenuCollectionData.swift in Sources */,
 				F089D9AB1F3861A500395056 /* WeatherDayAdapter.swift in Sources */,
@@ -1022,6 +1045,7 @@
 				F089D9C91F386FAA00395056 /* RandomCollectionData.swift in Sources */,
 				F078234D1F5E7CFB00FE9CC0 /* TweetSectionDescriptor.swift in Sources */,
 				F0CEDE182200B0CC00817466 /* AlphabetModel.swift in Sources */,
+				3AF0B0B2246AEBBB00ACDE94 /* BooleanSetting.swift in Sources */,
 				F0577CCC1F39EA420051BD18 /* PantoneColorCollectionViewCell.swift in Sources */,
 				F043A9581F61234200CB895D /* RealTimeStyle.swift in Sources */,
 				F089D9B81F3861A500395056 /* WheaterAdapters.swift in Sources */,
@@ -1046,6 +1070,7 @@
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 				F0D3ED6C1F41F6E20087CBD2 /* MenuSectionDescriptor.swift in Sources */,
 				F0530FC71F5DF06D00F2318F /* RealTimeViewController.swift in Sources */,
+				3AF0B0AA246ACA9B00ACDE94 /* StackExample.swift in Sources */,
 				F0530FCB1F5DF21800F2318F /* RealTimeService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
