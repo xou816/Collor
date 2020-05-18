@@ -35,7 +35,7 @@ class StackExample: UIViewController {
         collection.update(with: StackAdapter {
             AdaptableLabel.adapted(by: StackLabelAdapter(text: "First label"))
             
-            Decoration(MyDecoration(), innerMargin: 8) {
+            StackDescriptor(MyDecoration(), innerMargin: 8) {
                 AdaptableLabel.adapted(by: StackLabelAdapter(text: "A Collor cell :"))
                 TweetCollectionViewCell.adapted(by: self.tweet)
                 AdaptableLabel.adapted(by: StackLabelAdapter(text: "isOn = \(self.isOn)"))
@@ -48,13 +48,13 @@ class StackExample: UIViewController {
                 AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some label 2"))
             }
             
-            exampleSection()
+            exampleGroup()
             
         })
     }
     
-    private func exampleSection() -> Section {
-        Section {
+    private func exampleGroup() -> GroupDescriptor {
+        GroupDescriptor {
             AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some label 3"))
             AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some label 4"))
         }

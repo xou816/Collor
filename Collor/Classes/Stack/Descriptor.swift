@@ -17,11 +17,11 @@ public struct DescriptorItem {
 
 // wrapper around multiple descriptors
 public protocol Descriptor {
-    func items() -> [DescriptorItem]
+    var items: [DescriptorItem] { get }
 }
 
 extension DescriptorItem: Descriptor {
-    public func items() -> [DescriptorItem] {
+    public var items: [DescriptorItem] {
         [self]
     }
 }
@@ -33,31 +33,31 @@ extension DescriptorItem {
         with adapter: V.Adapter) -> DescriptorItem
         where V: UIView & Adaptable {
             
-            DescriptorItem(
-                identifier: "\(V.self)",
-                adapter: adapter,
-                update: { view in
-                    if let castView = view as? V {
-                        castView.update(with: adapter)
-                    }
-                },
-                create: view)
+            describe(viewLike: view, with: adapter)
     }
     
     public static func describe<V>(
-        controller: @autoclosure @escaping () -> V,
+        _ controller: @autoclosure @escaping () -> V,
         with adapter: V.Adapter) -> DescriptorItem
         where V: UIViewController & Adaptable {
+            
+            describe(viewLike: controller, with: adapter)
+    }
+    
+    private static func describe<V>(
+        viewLike: @autoclosure @escaping () -> V,
+        with adapter: V.Adapter) -> DescriptorItem
+        where V: UIViewLike & Adaptable {
             
             DescriptorItem(
                 identifier: "\(V.self)",
                 adapter: adapter,
-                update: { controller in
-                    if let controller = controller as? V {
-                        controller.update(with: adapter)
+                update: { viewLike in
+                    if let viewLike = viewLike as? V {
+                        viewLike.update(with: adapter)
                     }
                 },
-                create: controller)
+                create: viewLike)
     }
 }
 
@@ -70,32 +70,28 @@ public struct If: Descriptor {
         self.builderClosure = builderClosure
     }
     
-    public func items() -> [DescriptorItem] {
+    public var items: [DescriptorItem] {
         condition ? builderClosure() : []
     }
 }
 
-public struct Section: Descriptor {
+public struct GroupDescriptor: Descriptor {
     let builderClosure: () -> [DescriptorItem]
     
     public init(@DescriptorBuilder builderClosure: @escaping () -> [DescriptorItem]) {
         self.builderClosure = builderClosure
     }
     
-    public func items() -> [DescriptorItem] {
+    public var items: [DescriptorItem] {
         builderClosure()
     }
 }
 
 @_functionBuilder
 public class DescriptorBuilder {
-    
-    public static func buildBlock(_ descriptors: DescriptorItem?...) -> [DescriptorItem] {
-        descriptors.compactMap { $0 }
-    }
-    
+        
     public static func buildBlock(_ descriptors: Descriptor?...) -> [DescriptorItem] {
-        descriptors.compactMap { $0 }.flatMap { $0.items() }
+        descriptors.compactMap { $0 }.flatMap { $0.items }
     }
 }
 

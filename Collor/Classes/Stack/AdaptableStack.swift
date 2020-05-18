@@ -39,7 +39,7 @@ extension Adaptable where Self: UIView {
 
 extension Adaptable where Self: UIViewController {
     public static func adapted(by adapter: Adapter) -> DescriptorItem  {
-        .describe(controller: create(), with: adapter)
+        .describe(create(), with: adapter)
     }
 }
 
@@ -52,18 +52,6 @@ public struct StackAdapter: Diffable {
     
     public func isEqual(to other: Diffable?) -> Bool {
         return false
-    }
-}
-
-public struct StackDescriptor: Descriptor {
-    let adapter: StackAdapter
-    
-    public init(@DescriptorBuilder builderClosure: () -> [DescriptorItem]) {
-        self.adapter = StackAdapter(builderClosure: builderClosure)
-    }
-    
-    public func items() -> [DescriptorItem] {
-        [.describe(controller: AdaptableStackView(), with: adapter)]
     }
 }
 
@@ -166,7 +154,7 @@ public final class AdaptableStackView: UIViewController, Adaptable {
     }
 }
 
-public struct Decoration: Descriptor {
+public struct StackDescriptor: Descriptor {
     let decoration: () -> UIView
     let adapter: StackAdapter
     let outerMargin: CGFloat
@@ -183,8 +171,11 @@ public struct Decoration: Descriptor {
         self.adapter = StackAdapter(builderClosure: builderClosure)
     }
     
-    public func items() -> [DescriptorItem] {
-        [.describe(controller: AdaptableStackView(decoration: self.decoration(), outerMargin: self.outerMargin, innerMargin: self.innerMargin), with: adapter)]
+    public var items: [DescriptorItem] {
+        [.describe(AdaptableStackView(
+            decoration: self.decoration(),
+            outerMargin: self.outerMargin,
+            innerMargin: self.innerMargin), with: adapter)]
     }
 }
 
