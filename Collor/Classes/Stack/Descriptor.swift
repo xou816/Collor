@@ -7,15 +7,41 @@
 
 import UIKit
 
-// type-erased descriptor
+/// Type-erased descriptor thats bind a view to its adapter
 public struct DescriptorItem {
-    let identifier: String
+    var identifier: String
     let adapter: Any
     let update: (UIViewLike) -> Void
     let create: () -> UIViewLike
+    
+    mutating func rename(prefix: String, suffix: String) -> DescriptorItem {
+        identifier = "\(prefix)_\(identifier)_\(suffix)"
+        return self
+    }
 }
 
-// wrapper around multiple descriptors
+class IdentifierGenerator {
+    
+    private var collisions = [String: Int]()
+    private let prefix: String
+    
+    init(prefix: String) {
+        self.prefix = prefix
+    }
+    
+    func process(_ items: [DescriptorItem]) -> [DescriptorItem] {
+        collisions.removeAll(keepingCapacity: true)
+        return items.map { item in
+            var item = item
+            let count = collisions[item.identifier] ?? 0
+            collisions[item.identifier] = count + 1
+            return item.rename(prefix: prefix, suffix: "\(count)")
+        }
+    }
+}
+
+/// Descriptor wrapper
+/// Useful to create utility descriptors
 public protocol Descriptor {
     var items: [DescriptorItem] { get }
 }
@@ -28,6 +54,7 @@ extension DescriptorItem: Descriptor {
 
 extension DescriptorItem {
 
+    /// Create a descriptor for an adaptable view
     public static func describe<V>(
         _ view: @autoclosure @escaping () -> V,
         with adapter: V.Adapter) -> DescriptorItem
@@ -36,6 +63,7 @@ extension DescriptorItem {
             describe(viewLike: view, with: adapter)
     }
     
+    /// Create a descriptor for an adaptable controller
     public static func describe<V>(
         _ controller: @autoclosure @escaping () -> V,
         with adapter: V.Adapter) -> DescriptorItem
@@ -61,42 +89,60 @@ extension DescriptorItem {
     }
 }
 
+/// Descriptor thats returns items conditionnally
 public struct If: Descriptor {
+    private let generator = IdentifierGenerator(prefix: "If")
     let condition: Bool
-    let builderClosure: () -> [DescriptorItem]
+    let builderClosure: () -> Descriptor
     
-    public init(_ condition: Bool, @DescriptorBuilder builderClosure: @escaping () -> [DescriptorItem]) {
+    public init(_ condition: Bool, @DescriptorBuilder builderClosure: @escaping () -> Descriptor) {
         self.condition = condition
         self.builderClosure = builderClosure
     }
     
     public var items: [DescriptorItem] {
-        condition ? builderClosure() : []
+        condition ? generator.process(builderClosure().items) : []
     }
 }
 
+/// Descriptor that wraps other descriptors
+/// Useful to organize code in smaller chunks
+/// Does not add unnecessary views to the hierarchy
 public struct GroupDescriptor: Descriptor {
-    let builderClosure: () -> [DescriptorItem]
+    private let generator = IdentifierGenerator(prefix: "Group")
+    public let items: [DescriptorItem]
     
-    public init(@DescriptorBuilder builderClosure: @escaping () -> [DescriptorItem]) {
-        self.builderClosure = builderClosure
+    public init(@DescriptorBuilder builderClosure: @escaping () -> Descriptor) {
+        self.items = generator.process(builderClosure().items)
     }
     
-    public var items: [DescriptorItem] {
-        builderClosure()
+    public init(items: [DescriptorItem]) {
+        self.items = generator.process(items)
     }
 }
 
 @_functionBuilder
 public class DescriptorBuilder {
         
-    public static func buildBlock(_ descriptors: Descriptor?...) -> [DescriptorItem] {
-        descriptors.compactMap { $0 }.flatMap { $0.items }
+    public static func buildBlock(_ descriptors: Descriptor?...) -> Descriptor {
+        GroupDescriptor(items:
+            descriptors.compactMap { $0 }.flatMap { $0.items })
     }
 }
 
-// MARK: --------------
+// Automatic Diffable conformance when Hashable
+extension Diffable where Self: Hashable {
+    public func isEqual(to other: Diffable?) -> Bool {
+        if let other = other as? Self {
+            return other.hashValue == hashValue
+        }
+        return false
+    }
+}
 
+// MARK: Module private protocols
+
+/// Protocol to abstract UIView/UIViewController
 protocol UIViewLike: class {
     var uiView: UIView { get }
     var uiViewController: UIViewController? { get }
@@ -104,6 +150,7 @@ protocol UIViewLike: class {
 
 extension UIView: UIViewLike {
     var uiView: UIView {
+        // allow using UICollectionViewCell in stacks
         if let cell = self as? UICollectionViewCell {
             return cell.contentView
         } else {
@@ -116,13 +163,4 @@ extension UIView: UIViewLike {
 extension UIViewController: UIViewLike {
     var uiView: UIView { self.view }
     var uiViewController: UIViewController? { self }
-}
-
-extension Diffable where Self: Hashable {
-    public func isEqual(to other: Diffable?) -> Bool {
-        if let other = other as? Self {
-            return other.hashValue == hashValue
-        }
-        return false
-    }
 }

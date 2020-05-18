@@ -44,8 +44,7 @@ class StackExample: UIViewController {
             BooleanSetting.adapted(by: MyBooleanSetting(text: "View more", isOn: self.isOn))
             
             If(self.isOn) {
-                AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some label 1"))
-                AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some label 2"))
+                AdaptableLabel.adapted(by: StackLabelAdapter(text: "View more toggled!"))
             }
             
             exampleGroup()
@@ -55,8 +54,8 @@ class StackExample: UIViewController {
     
     private func exampleGroup() -> GroupDescriptor {
         GroupDescriptor {
-            AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some label 3"))
-            AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some label 4"))
+            AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some label"))
+            AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some other label"))
         }
     }
 

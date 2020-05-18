@@ -7,14 +7,28 @@
 
 import UIKit
 
+/// Adaptable views or controllers can be updated using an Adapter
 public protocol Adaptable {
+    
+    /// A view model for the Adaptable view
+    /// Should conform to Diffable if possible
     associatedtype Adapter
+    
+    /// Event delegate for interactive views and controls
     associatedtype Delegate = ()
+    
+    /// Update view
     func update(with adapter: Adapter)
+    
+    /// Create an instance of the Adaptable view
+    /// Only needed when using automatic descriptors provided by `adapted(by:)`,
+    /// otherwise, feel free to error here and use custom descriptors instead.
     static func create() -> Self
 }
 
 extension Adaptable where Self: UIResponder {
+    
+    /// Find delegate in the hierarchy
     public var delegate: Delegate? {
         nextConformingResponder()
     }
@@ -32,29 +46,37 @@ extension UIResponder {
 }
 
 extension Adaptable where Self: UIView {
+    
+    /// Create a descriptor for the view, with the provided Adapter
     public static func adapted(by adapter: Adapter) -> DescriptorItem  {
         .describe(create(), with: adapter)
     }
 }
 
 extension Adaptable where Self: UIViewController {
+    
+    /// Create a descriptor for the controller, with the provided Adapter
     public static func adapted(by adapter: Adapter) -> DescriptorItem  {
         .describe(create(), with: adapter)
     }
 }
 
+/// Adapter for AdaptableStackViews
 public struct StackAdapter: Diffable {
-    let descriptors: [DescriptorItem]
+    let items: [DescriptorItem]
     
-    public init(@DescriptorBuilder builderClosure: () -> [DescriptorItem]) {
-        self.descriptors = builderClosure()
+    public init(@DescriptorBuilder builderClosure: () -> Descriptor) {
+        self.items = builderClosure().items
     }
     
     public func isEqual(to other: Diffable?) -> Bool {
+        // Always return false to perform diff on child views
         return false
     }
 }
 
+/// A managed StackView that is able to update its children
+/// Children should not be added directly: use a StackAdapter instead
 public final class AdaptableStackView: UIViewController, Adaptable {
     
     public static func create() -> AdaptableStackView {
@@ -71,6 +93,8 @@ public final class AdaptableStackView: UIViewController, Adaptable {
         return stack
     }()
     
+    /// Weak container for UIViews and UIViewControllers
+    /// Safer since these children already appear in `children`/`arrangedSubviews`
     private struct WeakViewLike {
         weak var viewLike: UIViewLike?
         init(_ viewLike: UIViewLike) {
@@ -81,6 +105,9 @@ public final class AdaptableStackView: UIViewController, Adaptable {
     private var descriptors = [DescriptorItem]()
     private var allChildren = [WeakViewLike]()
     
+    /// Create a new Stack with an optional decoration view
+    /// Outer margin adds space around the decoration, and inner margin adds
+    /// space around the stacked views
     public init(decoration: UIView? = nil, outerMargin: CGFloat = 0, innerMargin: CGFloat = 0) {
         super.init(nibName: nil, bundle: nil)
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -98,31 +125,48 @@ public final class AdaptableStackView: UIViewController, Adaptable {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func printDiff(_ diff: CollorDiff<Int, String>, newItems: [DescriptorItem]) {
+        let reloaded = diff.reloaded.map { "\($0)=\(descriptors[$0].identifier)" }
+        print("reloaded = \(reloaded)")
+        let deleted = diff.deleted.map { "\($0)=\(descriptors[$0].identifier)" }
+        print("deleted  = \(deleted)")
+        let inserted = diff.inserted.map { "\($0)=\(newItems[$0].identifier)" }
+        print("inserted = \(inserted)")
+    }
+    
+    /// Update the view with the provided StackAdapter
     public func update(with adapter: StackAdapter) {
+        let descriptorItems = adapter.items
         let diff = CollorDiff(before: asDiffItems(descriptors),
-                              after: asDiffItems(adapter.descriptors))
+                              after: asDiffItems(descriptorItems))
+        print("----------------")
+        printDiff(diff, newItems: descriptorItems)
         view.layoutSubviews()
+        var toDelete = [UIView]()
         UIView.animate(withDuration: 0.2, animations: {
-            diff.reloaded.forEach { index in
-                self.update(adapter.descriptors[index], at: index)
-            }
-            diff.deleted.sorted().reversed().forEach { index in
+            toDelete = diff.deleted.sorted().reversed().map { index in
                 self.remove(at: index)
             }
             diff.inserted.forEach { index in
-                self.insert(adapter.descriptors[index], at: index)
+                self.insert(descriptorItems[index], at: index)
+            }
+            diff.reloaded.forEach { index in
+                self.update(descriptorItems[index], at: index)
             }
             diff.moved.forEach { (from, to) in
                 // todo
             }
             self.view.layoutSubviews()
+        }, completion: { _ in
+            toDelete.forEach { view in
+                view.removeFromSuperview()
+            }
         })
-        
     }
-    
+
     private func asDiffItems(_ descriptors: [DescriptorItem]) -> [CollorDiff<Int, String>.DiffItem] {
-        descriptors.enumerated().map { index, desc in
-            CollorDiff<Int, String>.DiffItem(index, "\(desc.identifier)_\(index)", desc.adapter as? Diffable)
+        return descriptors.enumerated().map { index, desc in
+            CollorDiff<Int, String>.DiffItem(index, desc.identifier, desc.adapter as? Diffable)
         }
     }
     
@@ -147,13 +191,15 @@ public final class AdaptableStackView: UIViewController, Adaptable {
         }
     }
     
-    private func remove(at index: Int) {
+    private func remove(at index: Int) -> UIView {
         stack.arrangedSubviews[index].isHidden = true
         allChildren.remove(at: index)
         descriptors.remove(at: index)
+        return stack.arrangedSubviews[index]
     }
 }
 
+/// A utility Descriptor to insert a nested AdaptableStackView
 public struct StackDescriptor: Descriptor {
     let decoration: () -> UIView
     let adapter: StackAdapter
@@ -164,7 +210,7 @@ public struct StackDescriptor: Descriptor {
         _ decoration: @escaping @autoclosure () -> UIView,
         outerMargin: CGFloat = 0,
         innerMargin: CGFloat = 0,
-        @DescriptorBuilder builderClosure: @escaping () -> [DescriptorItem]) {
+        @DescriptorBuilder builderClosure: @escaping () -> Descriptor) {
         self.decoration = decoration
         self.outerMargin = outerMargin
         self.innerMargin = innerMargin
