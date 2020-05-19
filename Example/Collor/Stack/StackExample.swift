@@ -9,36 +9,30 @@
 import UIKit
 import Collor
 
-extension TweetCollectionViewCell: Adaptable {
-    
-    static func create() -> TweetCollectionViewCell {
-        Bundle(for: TweetCollectionViewCell.self)
-            .loadNibNamed("\(TweetCollectionViewCell.self)", owner: self, options: nil)?
-            .first as! TweetCollectionViewCell
-    }
-}
+extension TweetCollectionViewCell: Adaptable {}
+extension TweetDescriptor: Descriptor {}
 
 class StackExample: UIViewController {
     
     var collection = AdaptableStackView()
     var isOn = false
     
-    let tweet = TweetAdapter(tweet: Tweet(
-        id: "6",
-        text: "Nam turpis tellus, commodo quis odio sit amet, aliquam posuere nulla.",
-        userProfileImageURL: "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
-        color: 0x2dde98,
-        favoriteCount: 1,
-        retweetCount: 1))
+    var tweet: TweetAdapter {
+        TweetAdapter(tweet: Tweet(
+            id: "6",
+            text: "This is a Collor cell and desriptor, in a stack, in a (new) decoration view. Some update: isOn=\(self.isOn)",
+            userProfileImageURL: "https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png",
+            color: 0x2dde98,
+            favoriteCount: 1,
+            retweetCount: 1))
+    }
     
     func reload() {
         collection.update(with: StackAdapter {
             AdaptableLabel.adapted(by: StackLabelAdapter(text: "First label"))
             
             StackDescriptor(MyDecoration(), innerMargin: 8) {
-                AdaptableLabel.adapted(by: StackLabelAdapter(text: "A Collor cell :"))
-                TweetCollectionViewCell.adapted(by: self.tweet)
-                AdaptableLabel.adapted(by: StackLabelAdapter(text: "isOn = \(self.isOn)"))
+                TweetDescriptor(adapter: self.tweet)
             }
             
             BooleanSetting.adapted(by: MyBooleanSetting(text: "View more", isOn: self.isOn))
@@ -53,9 +47,10 @@ class StackExample: UIViewController {
     }
     
     private func exampleGroup() -> GroupDescriptor {
-        GroupDescriptor {
-            AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some label"))
-            AdaptableLabel.adapted(by: StackLabelAdapter(text: "Some other label"))
+        let labelDescriptor = AdaptableLabel.adapted
+        return GroupDescriptor {
+            labelDescriptor(StackLabelAdapter(text: "Some label"))
+            labelDescriptor(StackLabelAdapter(text: "Some other label"))
         }
     }
 

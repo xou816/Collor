@@ -52,6 +52,23 @@ extension DescriptorItem: Descriptor {
     }
 }
 
+extension Descriptor where Self: CollectionCellDescribable  {
+    public var items: [DescriptorItem] {
+        [DescriptorItem(
+            identifier: identifier,
+            adapter: getAdapter(),
+            update: { viewLike in
+                if let adaptable = viewLike as? CollectionCellAdaptable {
+                    adaptable.update(with: self.getAdapter())
+                }
+            },
+            create: {
+                Bundle(for: Self.self)
+                    .loadNibNamed(self.identifier, owner: nil, options: nil)?.first as! UIView
+            })]
+    }
+}
+
 extension DescriptorItem {
 
     /// Create a descriptor for an adaptable view
@@ -149,14 +166,7 @@ protocol UIViewLike: class {
 }
 
 extension UIView: UIViewLike {
-    var uiView: UIView {
-        // allow using UICollectionViewCell in stacks
-        if let cell = self as? UICollectionViewCell {
-            return cell.contentView
-        } else {
-            return self
-        }
-    }
+    var uiView: UIView { self }
     var uiViewController: UIViewController? { nil }
 }
 

@@ -28,6 +28,10 @@ public protocol Adaptable {
 
 extension Adaptable where Self: UIResponder {
     
+    public static func create() -> Self {
+        fatalError("Adaptable.create() not implemented! Use a custom Descriptor if you cannot implement a no-argument factory function")
+    }
+    
     /// Find delegate in the hierarchy
     public var delegate: Delegate? {
         nextConformingResponder()
@@ -117,7 +121,7 @@ public final class AdaptableStackView: UIViewController, Adaptable {
             decoration.translatesAutoresizingMaskIntoConstraints = false
             decoration.addSubview(stack, marginConstraint: innerMargin)
         } else {
-            view.addSubview(stack, marginConstraint: outerMargin)
+            view.addSubview(stack, marginConstraint: outerMargin + innerMargin)
         }
     }
             
@@ -201,13 +205,13 @@ public final class AdaptableStackView: UIViewController, Adaptable {
 
 /// A utility Descriptor to insert a nested AdaptableStackView
 public struct StackDescriptor: Descriptor {
-    let decoration: () -> UIView
+    let decoration: () -> UIView?
     let adapter: StackAdapter
     let outerMargin: CGFloat
     let innerMargin: CGFloat
     
     public init(
-        _ decoration: @escaping @autoclosure () -> UIView,
+        _ decoration: @escaping @autoclosure () -> UIView?,
         outerMargin: CGFloat = 0,
         innerMargin: CGFloat = 0,
         @DescriptorBuilder builderClosure: @escaping () -> Descriptor) {
