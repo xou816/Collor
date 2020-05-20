@@ -38,7 +38,9 @@ class StackExample: UIViewController {
             BooleanSetting.adapted(by: MyBooleanSetting(text: "View more", isOn: self.isOn))
             
             If(self.isOn) {
-                AdaptableLabel.adapted(by: StackLabelAdapter(text: "View more toggled!"))
+                StackDescriptor(MyDecoration(), innerMargin: 8) {
+                    AdaptableLabel.adapted(by: StackLabelAdapter(text: "View more toggled!"))
+                }
             }
             
             exampleGroup()

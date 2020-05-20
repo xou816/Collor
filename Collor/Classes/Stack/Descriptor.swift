@@ -157,7 +157,7 @@ extension Diffable where Self: Hashable {
     }
 }
 
-// MARK: Module private protocols
+// MARK: - Module private protocols
 
 /// Protocol to abstract UIView/UIViewController
 protocol UIViewLike: class {

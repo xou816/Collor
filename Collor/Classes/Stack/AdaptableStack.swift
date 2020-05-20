@@ -130,6 +130,7 @@ public final class AdaptableStackView: UIViewController, Adaptable {
     }
     
     private func printDiff(_ diff: CollorDiff<Int, String>, newItems: [DescriptorItem]) {
+        print("----------------")
         let reloaded = diff.reloaded.map { "\($0)=\(descriptors[$0].identifier)" }
         print("reloaded = \(reloaded)")
         let deleted = diff.deleted.map { "\($0)=\(descriptors[$0].identifier)" }
@@ -140,31 +141,32 @@ public final class AdaptableStackView: UIViewController, Adaptable {
     
     /// Update the view with the provided StackAdapter
     public func update(with adapter: StackAdapter) {
-        let descriptorItems = adapter.items
+        let newDescriptors = adapter.items
         let diff = CollorDiff(before: asDiffItems(descriptors),
-                              after: asDiffItems(descriptorItems))
-        print("----------------")
-        printDiff(diff, newItems: descriptorItems)
+                              after: asDiffItems(newDescriptors))
+        
+        // printDiff(diff, newItems: newDescriptors)
+        
         view.layoutSubviews()
-        var toDelete = [UIView]()
-        UIView.animate(withDuration: 0.2, animations: {
-            toDelete = diff.deleted.sorted().reversed().map { index in
-                self.remove(at: index)
-            }
-            diff.inserted.forEach { index in
-                self.insert(descriptorItems[index], at: index)
-            }
+        
+        let toDelete = diff.deleted.sorted().reversed().map { index in
+            self.remove(at: index)
+        }
+        
+        let toUnhide = diff.inserted.map { index -> UIView in
+            let view = self.insert(newDescriptors[index], at: index)
+            view.hide()
+            return view
+        }
+        
+        UIView.animate(withDuration: 0.15, animations: {
+            toDelete.forEach { view in view.hide() }
+            toUnhide.forEach { view in view.show() }
             diff.reloaded.forEach { index in
-                self.update(descriptorItems[index], at: index)
+                self.update(newDescriptors[index], at: index)
             }
-            diff.moved.forEach { (from, to) in
-                // todo
-            }
-            self.view.layoutSubviews()
         }, completion: { _ in
-            toDelete.forEach { view in
-                view.removeFromSuperview()
-            }
+            toDelete.forEach { view in view.removeFromSuperview() }
         })
     }
 
@@ -180,11 +182,12 @@ public final class AdaptableStackView: UIViewController, Adaptable {
         descriptors[index] = descriptor
     }
     
-    private func insert(_ descriptor: DescriptorItem, at index: Int) {
+    private func insert(_ descriptor: DescriptorItem, at index: Int) -> UIView {
         let viewLike = descriptor.create()
         descriptor.update(viewLike)
         descriptors.insert(descriptor, at: index)
         insert(viewLike, at: index)
+        return viewLike.uiView
     }
     
     private func insert(_ viewLike: UIViewLike, at index: Int) {
@@ -196,7 +199,6 @@ public final class AdaptableStackView: UIViewController, Adaptable {
     }
     
     private func remove(at index: Int) -> UIView {
-        stack.arrangedSubviews[index].isHidden = true
         allChildren.remove(at: index)
         descriptors.remove(at: index)
         return stack.arrangedSubviews[index]
@@ -229,7 +231,17 @@ public struct StackDescriptor: Descriptor {
     }
 }
 
-extension UIView {
+fileprivate extension UIView {
+    
+    func show() {
+        isHidden = false
+        alpha = 1
+    }
+    
+    func hide() {
+        isHidden = true
+        alpha = 0
+    }
     
     func addSubview(_ child: UIView, marginConstraint margin: CGFloat) {
         self.addSubview(child)
