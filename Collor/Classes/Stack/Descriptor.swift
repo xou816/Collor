@@ -10,13 +10,33 @@ import UIKit
 /// Type-erased descriptor thats bind a view to its adapter
 public struct DescriptorItem {
     var identifier: String
-    let adapter: Any
+    var adapter: Diffable?
     let update: (UIViewLike) -> Void
     let create: () -> UIViewLike
     
     mutating func rename(prefix: String, suffix: String) -> DescriptorItem {
         identifier = "\(prefix)_\(identifier)_\(suffix)"
         return self
+    }
+    
+    public func diff(_ stub: DiffableStub) -> DescriptorItem {
+        var copy = self
+        copy.adapter = stub
+        return copy
+    }
+}
+
+public enum DiffableStub: Diffable {
+    case alwaysChanged
+    case neverChanged
+    
+    public func isEqual(to other: Diffable?) -> Bool {
+        switch self {
+            case .alwaysChanged:
+                return false
+            case .neverChanged:
+                return true
+        }
     }
 }
 
@@ -56,7 +76,7 @@ extension Descriptor where Self: CollectionCellDescribable  {
     public var items: [DescriptorItem] {
         [DescriptorItem(
             identifier: identifier,
-            adapter: getAdapter(),
+            adapter: getAdapter() as? Diffable,
             update: { viewLike in
                 if let adaptable = viewLike as? CollectionCellAdaptable {
                     adaptable.update(with: self.getAdapter())
@@ -96,7 +116,7 @@ extension DescriptorItem {
             
             DescriptorItem(
                 identifier: "\(V.self)",
-                adapter: adapter,
+                adapter: adapter as? Diffable,
                 update: { viewLike in
                     if let viewLike = viewLike as? V {
                         viewLike.update(with: adapter)
